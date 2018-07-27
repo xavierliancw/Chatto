@@ -41,7 +41,9 @@ public protocol ChatDataSourceProtocol: class {
     var hasMoreNext: Bool { get }
     var hasMorePrevious: Bool { get }
     var chatItems: [ChatItemProtocol] { get }
-    weak var delegate: ChatDataSourceDelegateProtocol? { get set }
+    
+    /// Remember to make this a weak variable when conforming!
+    var delegate: ChatDataSourceDelegateProtocol? { get set }   //Can't write weak here since this is a protocol
 
     func loadNext() // Should trigger chatDataSourceDidUpdate with UpdateType.Pagination
     func loadPrevious() // Should trigger chatDataSourceDidUpdate with UpdateType.Pagination
